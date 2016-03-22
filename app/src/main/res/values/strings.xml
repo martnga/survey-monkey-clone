@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Survey</string>
+    <string name="intro_txt">At AFEX we are always working to improve our services and your feedback is important to us. Please would you take a few minutes to complete the attached questionnaire. It should take no longer than 3 minutes.</string>
+</resources>

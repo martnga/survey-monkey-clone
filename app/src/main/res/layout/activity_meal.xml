@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.craft.Survey.meal">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:background="@color/green"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Which meal would you like to provide feedback about?"
+        android:textSize="16dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/toolbar"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:id="@+id/meal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/top"
+        android:layout_below="@+id/meal"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_image"
+                    android:id="@+id/breakfast"
+                    android:padding="2dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/lib/com.mikhaellopez.circularimageviewsample"
+                        android:id="@+id/breakfast_image"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/breakfast"
+                        app:civ_border_color="@color/green"
+                        app:civ_border_width="2dp" />
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/meal_title"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:text="Break Fast"
+                            android:gravity="center"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            android:id="@+id/breakB"
+                            />
+                    </LinearLayout>
+
+                </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_image"
+                    android:layout_toRightOf="@+id/breakfast"
+                    android:id="@+id/lunch"
+                    android:padding="2dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/lib/com.mikhaellopez.circularimageviewsample"
+                        android:id="@+id/lunch_image"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/lunch"
+                        app:civ_border_color="@color/green"
+                        app:civ_border_width="2dp" />
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/meal_title"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:text="Lunch"
+                            android:gravity="center"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            android:id="@+id/lunchB"
+                            />
+                    </LinearLayout>
+
+                </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:gravity="center">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_image"
+            android:id="@+id/dinner"
+            android:padding="2dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/lib/com.mikhaellopez.circularimageviewsample"
+                android:id="@+id/dinner_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/dinner"
+                app:civ_border_color="@color/green"
+                app:civ_border_width="2dp" />
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/meal_title"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:text="Dinner"
+                    android:gravity="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:id="@+id/DinnerB"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
