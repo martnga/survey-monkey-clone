@@ -34,7 +34,7 @@ public class GeneralStay extends AppCompatActivity {
     int TotalQuestions=0;
     RatingBar ratingBar;
     String [] Questions={"How enjoyable was your stay at Kapese Village?","How would you rate the following aspects of your stay?"};
-    String [] MealAspects={"Receiption","Housekeeping","Dining","Maintenance","Laundry","Catering","Grounds,Medical"};
+    String [] MealAspects={"Reception","Housekeeping","Dining","Maintenance","Laundry","Catering","Grounds,Medical"};
     String MealType="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
