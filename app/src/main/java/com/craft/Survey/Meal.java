@@ -2,7 +2,6 @@ package com.craft.Survey;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.LayerDrawable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -16,11 +15,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.florent37.viewanimator.ViewAnimator;
 
-public class BreakFast extends AppCompatActivity {
+public class Meal extends AppCompatActivity {
     TextView meal1,options,counter;
     ImageView Smiley1,Smiley2,Smiley3,Smiley4,Smiley5;
     LinearLayout LSmilies;
@@ -31,8 +29,8 @@ public class BreakFast extends AppCompatActivity {
     int i=0,j=0;
     int TotalQuestions=0;
     RatingBar ratingBar;
-    String [] Questions={"How did you enjoy your meal?","How would you rate the following aspects of your meal?"};
-    String [] MealAspects={"Temperature","Presentation","Portion Size","Variety","Service","Cleanliness of facility","Staff Coutesy"};
+    String [] Questions={"How did you enjoy your Meals?","How would you rate the following aspects of your Meals?"};
+    String [] MealAspects={"Temperature","Presentation","Portion Size","Variety","Service","Cleanliness of facility","Staff Courtesy"};
     String MealType="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +54,7 @@ public class BreakFast extends AppCompatActivity {
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         Bundle bundle = getIntent().getExtras();
         MealType=bundle.getString("MealType");
-        meal1.setText(Questions[i].replace("meal",MealType));
+        meal1.setText(Questions[i].replace("Meals",MealType));
         Typeface CustomFont=Typeface.createFromAsset(getAssets(),"fonts/SourceSerifPro-Regular.ttf");
         meal1.setTypeface(CustomFont);
         Typeface ButtonFont=Typeface.createFromAsset(getAssets(),"fonts/SourceSerifPro-Bold.ttf");
@@ -78,13 +76,13 @@ public class BreakFast extends AppCompatActivity {
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                //Toast.makeText(BreakFast.this, "Rates " + ratingBar.getRating(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Meal.this, "Rates " + ratingBar.getRating(), Toast.LENGTH_SHORT).show();
                 if(ratingBar.getRating()==5.0){
-                    Smiley1.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.thumbs_up));
-                    Smiley2.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.thumbs_up));
-                    Smiley3.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.thumbs_up));
-                    Smiley4.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.thumbs_up));
-                    Smiley5.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.thumbs_up));
+                    Smiley1.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.thumbs_up));
+                    Smiley2.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.thumbs_up));
+                    Smiley3.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.thumbs_up));
+                    Smiley4.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.thumbs_up));
+                    Smiley5.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.thumbs_up));
                     Smiley5.setVisibility(View.VISIBLE);
                     Smiley4.setVisibility(View.VISIBLE);
                     Smiley3.setVisibility(View.VISIBLE);
@@ -92,10 +90,10 @@ public class BreakFast extends AppCompatActivity {
                     Smiley1.setVisibility(View.VISIBLE);
                 }
                 else if(ratingBar.getRating()==4.0){
-                    Smiley1.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.happy));
-                    Smiley2.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.happy));
-                    Smiley3.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.happy));
-                    Smiley4.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.happy));
+                    Smiley1.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.happy));
+                    Smiley2.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.happy));
+                    Smiley3.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.happy));
+                    Smiley4.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.happy));
                     Smiley5.setVisibility(View.INVISIBLE);
                     Smiley4.setVisibility(View.VISIBLE);
                     Smiley3.setVisibility(View.VISIBLE);
@@ -103,9 +101,9 @@ public class BreakFast extends AppCompatActivity {
                     Smiley1.setVisibility(View.VISIBLE);
                 }
                 else if(ratingBar.getRating()==3.0){
-                    Smiley1.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.happy));
-                    Smiley2.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.happy));
-                    Smiley3.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.happy));
+                    Smiley1.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.happy));
+                    Smiley2.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.happy));
+                    Smiley3.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.happy));
                     Smiley5.setVisibility(View.INVISIBLE);
                     Smiley4.setVisibility(View.INVISIBLE);
                     Smiley3.setVisibility(View.VISIBLE);
@@ -113,8 +111,8 @@ public class BreakFast extends AppCompatActivity {
                     Smiley1.setVisibility(View.VISIBLE);
                 }
                 else if(ratingBar.getRating()==2.0){
-                    Smiley1.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.sad));
-                    Smiley2.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.sad));
+                    Smiley1.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.sad));
+                    Smiley2.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.sad));
                     Smiley3.setVisibility(View.INVISIBLE);
                     Smiley5.setVisibility(View.INVISIBLE);
                     Smiley4.setVisibility(View.INVISIBLE);
@@ -122,7 +120,7 @@ public class BreakFast extends AppCompatActivity {
                     Smiley1.setVisibility(View.VISIBLE);
                 }
                 else if(ratingBar.getRating()==1.0){
-                    Smiley1.setImageDrawable(BreakFast.this.getResources().getDrawable(R.drawable.thumbs_down));
+                    Smiley1.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.thumbs_down));
                     Smiley2.setVisibility(View.INVISIBLE);
                     Smiley3.setVisibility(View.INVISIBLE);
                     Smiley5.setVisibility(View.INVISIBLE);
@@ -153,7 +151,7 @@ public class BreakFast extends AppCompatActivity {
                 if (ratingBar.getRating() > 0.0) {
                     if(j==MealAspects.length-1)
                     {
-                        Intent intent=new Intent(BreakFast.this,FinalScreen.class);
+                        Intent intent=new Intent(Meal.this,FinalScreen.class);
                         startActivity(intent);
                     }
                     if (i < Questions.length - 1 || j < MealAspects.length - 1) {
@@ -178,7 +176,7 @@ public class BreakFast extends AppCompatActivity {
 
                                     .start();
                         }
-                        meal1.setText(Questions[i].replace("meal", MealType));
+                        meal1.setText(Questions[i].replace("Meals", MealType));
                         ratingBar.setRating(0.0f);
                         if (i != Questions.length - 1) {
                             ViewAnimator
@@ -195,7 +193,7 @@ public class BreakFast extends AppCompatActivity {
 
                                     .start();
                         }
-                        //Toast.makeText(BreakFast.this, "Rates " + ratingBar.getRating(),Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Meal.this, "Rates " + ratingBar.getRating(),Toast.LENGTH_SHORT).show();
                     }
                     Smiley5.setVisibility(View.INVISIBLE);
                     Smiley4.setVisibility(View.INVISIBLE);

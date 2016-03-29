@@ -7,17 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class meal extends AppCompatActivity {
+public class Meals extends AppCompatActivity {
     RelativeLayout breakfast,lunch,dinner;
     TextView meal,DinnerB,lunchB,breakB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meal);
+        setContentView(R.layout.activity_meals);
         breakfast=(RelativeLayout) findViewById(R.id.breakfast);
         lunch=(RelativeLayout) findViewById(R.id.lunch);
         dinner=(RelativeLayout) findViewById(R.id.dinner);
@@ -37,7 +36,7 @@ public class meal extends AppCompatActivity {
         breakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(meal.this, BreakFast.class);
+                Intent intent = new Intent(Meals.this, Meal.class);
                 intent.putExtra("MealType","Break Fast");
                 startActivity(intent);
             }
@@ -45,7 +44,7 @@ public class meal extends AppCompatActivity {
         lunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(meal.this,BreakFast.class);
+                Intent intent=new Intent(Meals.this,Meal.class);
                 intent.putExtra("MealType","Lunch");
                 startActivity(intent);
             }
@@ -53,7 +52,7 @@ public class meal extends AppCompatActivity {
         dinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(meal.this,BreakFast.class);
+                Intent intent=new Intent(Meals.this,Meal.class);
                 intent.putExtra("MealType","Dinner");
                 startActivity(intent);
             }

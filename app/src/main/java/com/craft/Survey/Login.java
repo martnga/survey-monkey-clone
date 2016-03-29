@@ -1,5 +1,6 @@
 package com.craft.Survey;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -7,10 +8,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
@@ -45,10 +48,11 @@ public class Login extends AppCompatActivity {
     }
 
     public void loginUser(final String email, final String password){
-        JsonObjectRequest authRequest = new JsonObjectRequest(Request.Method.POST, LOGIN_URL, null,
-                new Response.Listener<JSONObject>() {
+        StringRequest authRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
+                new Response.Listener<String>() {
+
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(String response) {
 
                         try {
                             Log.d("Login Class", response.toString());
@@ -58,6 +62,7 @@ public class Login extends AppCompatActivity {
                             editor.putString("phoneNumber", getPhoneNumber());
                             editor.putString("authToken", (String) response.get("token"));
                             editor.commit();*/
+                            startActivity(new Intent(Login.this, MainActivity.class));
                            // finish();
                         }catch (Exception e){}
 
@@ -66,7 +71,7 @@ public class Login extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("Authentication error", error.getMessage());
+                        Log.d("Authentication error", "ERROR " + error.getMessage());
 
                     }
                 }){
@@ -78,6 +83,19 @@ public class Login extends AppCompatActivity {
                 return params;
             }
 
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> headers =  new HashMap<>();
+               // if(params==null)params = new HashMap<>();
+               // headers.put("Content-Type", "application/json; charset=utf-8");
+                //..add other headers
+                return headers;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
         };
 
         // Adding request to request queue

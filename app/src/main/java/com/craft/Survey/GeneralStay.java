@@ -75,7 +75,7 @@ public class GeneralStay extends AppCompatActivity {
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                //Toast.makeText(BreakFast.this, "Rates " + ratingBar.getRating(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Meal.this, "Rates " + ratingBar.getRating(), Toast.LENGTH_SHORT).show();
                 if(ratingBar.getRating()==5.0){
                     Smiley1.setImageDrawable(GeneralStay.this.getResources().getDrawable(R.drawable.thumbs_up));
                     Smiley2.setImageDrawable(GeneralStay.this.getResources().getDrawable(R.drawable.thumbs_up));
@@ -172,7 +172,7 @@ public class GeneralStay extends AppCompatActivity {
 
                                     .start();
                         }
-                        meal1.setText(Questions[i].replace("meal", MealType));
+                        meal1.setText(Questions[i].replace("Meals", MealType));
                         ratingBar.setRating(0.0f);
                         if (i != Questions.length - 1) {
                             ViewAnimator
@@ -189,7 +189,7 @@ public class GeneralStay extends AppCompatActivity {
 
                                     .start();
                         }
-                        //Toast.makeText(BreakFast.this, "Rates " + ratingBar.getRating(),Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Meal.this, "Rates " + ratingBar.getRating(),Toast.LENGTH_SHORT).show();
                     }
                     if(MealType.equals("Stay")){
                         Intent intent=new Intent(GeneralStay.this,FinalScreen.class);

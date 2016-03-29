@@ -36,28 +36,28 @@ import at.grabner.circleprogress.TextMode;
 import at.grabner.circleprogress.UnitPosition;
 
 public class MainActivity extends AppCompatActivity {
-    ImageView mRatingImage;
-    /*TextView mealbtn,general,Intro;
+
+    TextView mealbtn,general,Intro;
     @Override
-   *//* protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
-        *//**//*setContentView(R.layout.activity_main);
-        *//**//**//**//*final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
+        /*final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(Color.WHITE);*//**//**//**//*
+        toolbar.setTitleTextColor(Color.WHITE);*/
         mealbtn=(TextView) findViewById(R.id.mealbtn);
         general=(TextView) findViewById(R.id.general);
         Intro=(TextView) findViewById(R.id.Intro);
-       *//**//**//**//* Typeface CustomFont=Typeface.createFromAsset(getAssets(),"fonts/SourceSerifPro-Regular.ttf");
+        Typeface CustomFont=Typeface.createFromAsset(getAssets(),"fonts/SourceSerifPro-Regular.ttf");
         Intro.setTypeface(CustomFont);
         Typeface ButtonFont=Typeface.createFromAsset(getAssets(),"fonts/SourceSerifPro-Bold.ttf");
         mealbtn.setTypeface(ButtonFont);
-        general.setTypeface(ButtonFont);*//**//**//**//*
+        general.setTypeface(ButtonFont);
         mealbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,meal.class);
+                Intent intent=new Intent(MainActivity.this,Meals.class);
                 startActivity(intent);
             }
         });
@@ -67,13 +67,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent=new Intent(MainActivity.this,GeneralStay.class);
                 startActivity(intent);
             }
-        });*//**//*
-    }*/
+        });
+    }
 
     /**
      * The log tag.
-     */
+     *//*
     private final static String TAG = "MainActivity";
+    ImageView mRatingImage;
 
     CircleProgressView mCircleView;
     Switch mSwitchSpin;
@@ -352,5 +353,5 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             mCircleView.setValueAnimated(42);
         }
-    }
+    }*/
 }
