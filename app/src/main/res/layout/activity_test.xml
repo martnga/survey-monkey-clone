@@ -15,8 +15,8 @@
 
 <at.grabner.circleprogress.CircleProgressView
     android:id="@+id/circleView"
-    android:layout_width="277dp"
-    android:layout_height="277dp"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
     CircleProgressView:cpv_value="10"
     CircleProgressView:cpv_maxValue="100"
     CircleProgressView:cpv_barColor="@color/colorPrimary"
@@ -24,8 +24,8 @@
     CircleProgressView:cpv_textColor="@color/colorPrimaryDark"
     CircleProgressView:cpv_unitColor="@color/colorAccent"
     CircleProgressView:cpv_spinColor="@color/colorPrimary"
-    CircleProgressView:cpv_barWidth="35dp"
-    CircleProgressView:cpv_rimWidth="35dp"
+    CircleProgressView:cpv_barWidth="15dp"
+    CircleProgressView:cpv_rimWidth="15dp"
     CircleProgressView:cpv_contourSize="0dp"
     CircleProgressView:cpv_autoTextSize="true"
     CircleProgressView:cpv_seekMode="true"
@@ -42,7 +42,6 @@
         android:layout_marginBottom="@dimen/pad_40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/sad"
         android:id="@+id/rating_image"
         />
 
