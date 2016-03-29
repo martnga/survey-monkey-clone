@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import android.os.AsyncTask;
@@ -23,6 +24,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.github.florent37.viewanimator.ViewAnimator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +36,7 @@ import at.grabner.circleprogress.TextMode;
 import at.grabner.circleprogress.UnitPosition;
 
 public class MainActivity extends AppCompatActivity {
+    ImageView mRatingImage;
     /*TextView mealbtn,general,Intro;
     @Override
    *//* protected void onCreate(Bundle savedInstanceState) {
@@ -86,10 +90,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test);
 
         mCircleView = (CircleProgressView) findViewById(R.id.circleView);
+        mRatingImage = (ImageView) findViewById(R.id.rating_image);
         mCircleView.setOnProgressChangedListener(new CircleProgressView.OnProgressChangedListener() {
             @Override
             public void onProgressChanged(float value) {
                 Log.d(TAG, "Progress Changed: " + value);
+                if(value > 50){
+                    mRatingImage.setImageDrawable(MainActivity.this.getResources().getDrawable(R.drawable.happy));
+                }else {
+                    mRatingImage.setImageDrawable(MainActivity.this.getResources().getDrawable(R.drawable.sad));
+                }
+
+                ViewAnimator
+                        .animate(mRatingImage)
+                        .translationY(1000, 0)
+                        .alpha(0, 1)
+                        .descelerate()
+                        .duration(500)
+
+                        .thenAnimate(mRatingImage)
+                        .scale(1f, 0.5f, 1f)
+                        .accelerate()
+                        .duration(1000)
+
+                        .start();
             }
         });
 

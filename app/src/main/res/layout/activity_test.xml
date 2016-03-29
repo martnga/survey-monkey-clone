@@ -37,6 +37,14 @@
     />
 
 
+    <ImageView
+        android:layout_marginTop="@dimen/pad_20dp"
+        android:layout_marginBottom="@dimen/pad_40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sad"
+        android:id="@+id/rating_image"
+        />
 
 <ScrollView
     android:layout_width="match_parent"
