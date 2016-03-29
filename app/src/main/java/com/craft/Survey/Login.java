@@ -13,7 +13,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
@@ -48,11 +47,10 @@ public class Login extends AppCompatActivity {
     }
 
     public void loginUser(final String email, final String password){
-        StringRequest authRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
-                new Response.Listener<String>() {
-
+        JsonObjectRequest authRequest = new JsonObjectRequest(Request.Method.POST, LOGIN_URL, null,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONObject response) {
 
                         try {
                             Log.d("Login Class", response.toString());
@@ -94,7 +92,7 @@ public class Login extends AppCompatActivity {
 
             @Override
             public String getBodyContentType() {
-                return "application/json";
+                return "application/json; charset=utf-8";
             }
         };
 
