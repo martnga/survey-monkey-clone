@@ -1,4 +1,14 @@
+buildscript {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+
+}
 apply plugin: 'com.android.application'
+
+repositories {
+    maven { url "https://jitpack.io" }
+}
 
 android {
     compileSdkVersion 22
@@ -6,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId "com.craft.Survey"
-        minSdkVersion 13
+        minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -28,4 +38,6 @@ dependencies {
     compile 'com.github.florent37:viewanimator:1.0.3@aar'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.android.volley:volley:1.0.0'
+    compile 'com.github.jakob-grabner:Circle-Progress-View:v1.2.9'
 }
+
