@@ -78,7 +78,7 @@ public class GeneralStay extends AppCompatActivity {
 
         //Setting Title For page
         CollapsingToolbarLayout mCollapseToolBar = (CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar);
-        mCollapseToolBar.setTitle("Meals");
+        mCollapseToolBar.setTitle("GeneralStay");
 
         main_content = (CoordinatorLayout) findViewById(R.id.main_content);
         mNextFab = (FloatingActionButton) findViewById(R.id.next_fab);
@@ -146,6 +146,7 @@ public class GeneralStay extends AppCompatActivity {
                 }
                 if (i >= MainActivity.GeneralStayQuestions.size() - 1) {
                     startActivity(new Intent(GeneralStay.this, FinalScreen.class));
+                    Log.d(TAG, GeneralStayAnswers.toString());
                     finish();
                 }
 

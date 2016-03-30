@@ -142,6 +142,7 @@ public class Meal extends AppCompatActivity {
                 }
                 if (i >= MainActivity.MealQuestions.size() - 1) {
                     startActivity(new Intent(Meal.this, FinalScreen.class));
+                    Log.d(TAG, MealAnswers.toString());
                     finish();
                 }
                 }
