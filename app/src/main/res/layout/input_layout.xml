@@ -24,8 +24,8 @@
 
         <at.grabner.circleprogress.CircleProgressView
             android:id="@+id/circleView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             CircleProgressView:cpv_value="10"
             CircleProgressView:cpv_maxValue="100"
             CircleProgressView:cpv_barColor="@color/colorPrimary"
@@ -47,8 +47,7 @@
 
 
         <ImageView
-            android:layout_marginTop="@dimen/pad_20dp"
-            android:layout_marginBottom="@dimen/pad_40dp"
+            android:layout_marginTop="@dimen/pad_15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/rating_image"
