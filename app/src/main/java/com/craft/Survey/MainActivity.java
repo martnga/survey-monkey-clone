@@ -32,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.florent37.viewanimator.ViewAnimator;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -51,9 +52,13 @@ public class MainActivity extends AppCompatActivity {
     TextView mealbtn,general,Intro;
     public static final String PREFS_NAME = "CREDENTIALS";
     public static final String TAG = "MainActivityClass";
-    public static String GENERAL_STAY_URL = AppController.URL + "/questions/1";
-    public static String MEAL_URL = AppController.URL + "/questions/2";
+    public static String GENERAL_STAY_URL = AppController.URL + "/questions/survey/2";
+    public static String MEAL_URL = AppController.URL + "/questions/survey/1";
     public static String KEY_AUTH_TOKEN = "X-Auth-Token";
+
+    public static HashMap<String, String>  GeneralStayQuestions = new HashMap<>();
+    public static HashMap<String, String>  MealQuestions = new HashMap<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         if(!isCurrentUser()){
             startActivity(new Intent(MainActivity.this, Login.class));
         }
+
         setContentView(R.layout.activity_main);
         /*final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -80,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         mealbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,Meals.class);
+                Intent intent=new Intent(MainActivity.this,Meal.class);
                 startActivity(intent);
             }
         });
@@ -127,6 +133,12 @@ public class MainActivity extends AppCompatActivity {
 
                         try {
                             Log.d(TAG, response.toString());
+                            JSONArray questions = response.getJSONArray("questions");
+                            for( int i = 0; i < questions.length(); i++){
+                                JSONObject obj = questions.getJSONObject(i);
+
+                                GeneralStayQuestions.put(obj.getString("id"), obj.getString("textContent"));
+                            }
 
                             //progressDialog.dismiss();
                             // startActivity(new Intent(GeneralStay.this, MainActivity.class));
@@ -178,7 +190,11 @@ public class MainActivity extends AppCompatActivity {
 
                         try {
                             Log.d(TAG, response.toString());
-
+                            JSONArray questions = response.getJSONArray("questions");
+                            for( int i = 0; i < questions.length(); i++){
+                                JSONObject obj = questions.getJSONObject(i);
+                                MealQuestions.put(obj.getString("id"), obj.getString("textContent"));
+                            }
                             //progressDialog.dismiss();
                             // startActivity(new Intent(GeneralStay.this, MainActivity.class));
                             // finish();

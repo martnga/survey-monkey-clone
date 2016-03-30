@@ -4,10 +4,14 @@ package com.craft.Survey;
 
 
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -20,13 +24,16 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.github.florent37.viewanimator.ViewAnimator;
 
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import at.grabner.circleprogress.AnimationState;
 import at.grabner.circleprogress.AnimationStateChangedListener;
@@ -47,6 +54,9 @@ public class GeneralStay extends AppCompatActivity {
     SeekBar mSeekBarSpinnerLength;
     Boolean mShowUnit = true;
     Spinner mSpinner;
+    public HashMap<String, String> GeneralStayAnswers = new HashMap<>();
+    TextView mQuestionTxt;
+    int i = 0;
 
    /* Snackbar snackbar = Snackbar
             .make(main_content, "Please Provide Your FeedBack.", Snackbar.LENGTH_LONG);
@@ -58,28 +68,44 @@ public class GeneralStay extends AppCompatActivity {
 
     FloatingActionButton mNextFab;
     CoordinatorLayout main_content;
-    String[] Questions = {"How enjoyable was your stay at Kapese Village?", "How would you rate the following aspects of your stay?"};
-    String[] MealAspects = {"Reception", "Housekeeping", "Dining", "Maintenance", "Laundry", "Catering", "Grounds,Medical"};
-
+    ArrayList<String> keys =  new ArrayList<>();
+    float ratingsValue = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_stay);
 
+        //Setting Title For page
+        CollapsingToolbarLayout mCollapseToolBar = (CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar);
+        mCollapseToolBar.setTitle("Meals");
+
         main_content = (CoordinatorLayout) findViewById(R.id.main_content);
         mNextFab = (FloatingActionButton) findViewById(R.id.next_fab);
-
+        mQuestionTxt = (TextView) findViewById(R.id.question_txt);
         mCircleView = (CircleProgressView) findViewById(R.id.circleView);
         mRatingImage = (ImageView) findViewById(R.id.rating_image);
+
+        //Getting The Question IDs
+        for (Map.Entry<String, String> entry : MainActivity.GeneralStayQuestions.entrySet())
+        {
+
+            keys.add(entry.getKey());
+
+        }
+
+        mQuestionTxt.setText(MainActivity.GeneralStayQuestions.get(keys.get(i)));
+
         mCircleView.setOnProgressChangedListener(new CircleProgressView.OnProgressChangedListener() {
             @Override
             public void onProgressChanged(float value) {
                 Log.d(TAG, "Progress Changed: " + value);
                 if(value > 50){
                     mRatingImage.setImageDrawable(GeneralStay.this.getResources().getDrawable(R.drawable.thumbs_up));
-                }else {
+                }else if (value < 50){
                     mRatingImage.setImageDrawable(GeneralStay.this.getResources().getDrawable(R.drawable.thumbs_down));
+                }else {
+                    mRatingImage.setImageDrawable(GeneralStay.this.getResources().getDrawable(R.drawable.level));
                 }
 
                 ViewAnimator
@@ -95,6 +121,34 @@ public class GeneralStay extends AppCompatActivity {
                         .duration(1000)
 
                         .start();
+                ratingsValue = value;
+            }
+        });
+        mNextFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (ratingsValue == 50) {
+                    Snackbar snackbar = Snackbar
+                            .make(main_content, "Please Provide Your FeedBack.", Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundColor(Color.parseColor("#005FAA"));
+                    TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    textView.setTextColor(Color.WHITE);
+                    snackbar.show();
+                } else {
+                    GeneralStayAnswers.put(keys.get(i), ratingsValue + "");
+                    i++;
+                    mQuestionTxt.setText(MainActivity.GeneralStayQuestions.get(keys.get(i)));
+                    mCircleView.setValue(50);
+
+
+                }
+                if (i >= MainActivity.GeneralStayQuestions.size() - 1) {
+                    startActivity(new Intent(GeneralStay.this, FinalScreen.class));
+                    finish();
+                }
+
             }
         });
 

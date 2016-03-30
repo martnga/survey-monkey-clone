@@ -18,6 +18,8 @@
         android:textAlignment="center"
         android:fontFamily="sans-serif"
         android:id="@+id/question_txt"
+        android:textSize="@dimen/txt_16sp"
+        android:textColor="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/pad_15dp"/>
