@@ -13,11 +13,12 @@ import com.android.volley.toolbox.Volley;
 public class AppController extends Application {
 
     public static final String PREFS_NAME = "CREDENTIALS";
+    public static final String URL = "http://196.43.248.17:8080/afex/api";
 
     public static final String TAG = AppController.class.getSimpleName();
 
     private RequestQueue mRequestQueue;
-    public static String mAuthToken = "";
+
 
 
     private static AppController mInstance;

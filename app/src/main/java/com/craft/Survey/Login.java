@@ -2,20 +2,23 @@ package com.craft.Survey;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -27,55 +30,66 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
 
     EditText mEmail, mPassword;
-    public static String LOGIN_URL = "http://196.43.248.17:8080/afex/api/users/login";
-    final ProgressDialog progressDialog = new ProgressDialog(Login.this,
-            R.style.AppTheme_Dark_Dialog);
+    Button mLoginBtn;
+    public static String LOGIN_URL = AppController.URL + "/users/login";
+    ProgressDialog progressDialog;
+    public static final String PREFS_NAME = "CREDENTIALS";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        progressDialog = new ProgressDialog(Login.this,R.style.AppTheme_Dark_Dialog);
         mEmail = (EditText) findViewById(R.id.email_txt);
         mPassword = (EditText) findViewById(R.id.password_txt);
+        mLoginBtn = (Button) findViewById(R.id.btn_login);
 
         findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //Init Progress Dialog
-                findViewById(R.id.btn_login).setEnabled(false);
+                //mLoginBtn.setEnabled(false);
                 progressDialog.setIndeterminate(true);
                 progressDialog.setMessage("Authenticating...");
                 progressDialog.show();
 
                String email =  mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
-                Log.d("Login Class", email + " " + password);
                 loginUser(email, password);
             }
         });
     }
 
     public void loginUser(final String email, final String password){
-        JsonObjectRequest authRequest = new JsonObjectRequest(Request.Method.POST, LOGIN_URL, null,
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("email", email);
+            jsonBody.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest authRequest = new JsonObjectRequest( Request.Method.POST,LOGIN_URL,jsonBody,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
                         try {
                             Log.d("Login Class", response.toString());
-                            /*//saving credentials in shared preferences
+                            String authToken = response.getString("authToken");
+                            //saving credentials in shared preferences
                             SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("phoneNumber", getPhoneNumber());
-                            editor.putString("authToken", (String) response.get("token"));
-                            editor.commit();*/
+                            editor.putString("authToken", authToken);
+                            editor.commit();
                             progressDialog.dismiss();
                             startActivity(new Intent(Login.this, MainActivity.class));
                            // finish();
                         }catch (Exception e){
-                            progressDialog.dismiss();
+                           progressDialog.dismiss();
                         }
 
                     }
@@ -83,32 +97,33 @@ public class Login extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("Authentication error", "ERROR " + error.getMessage());
+                        Log.d("Authentication error", "ERROR " + error.getCause());
                         progressDialog.dismiss();
 
                     }
                 }){
-            @Override
+            /*@Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("email", email);
                 params.put("password",password);
+                Log.d("Login Class", params.toString());
                 return params;
-            }
+            }*/
 
-            @Override
+           /* @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> headers =  new HashMap<>();
                // if(params==null)params = new HashMap<>();
-               // headers.put("Content-Type", "application/json; charset=utf-8");
+               headers.put("Content-Type", "application/json");
                 //..add other headers
                 return headers;
             }
 
             @Override
             public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
+                return "application/json";
+            }*/
         };
 
         // Adding request to request queue

@@ -1,6 +1,7 @@
 package com.craft.Survey;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -38,10 +39,14 @@ import at.grabner.circleprogress.UnitPosition;
 public class MainActivity extends AppCompatActivity {
 
     TextView mealbtn,general,Intro;
+    public static final String PREFS_NAME = "CREDENTIALS";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
+        if(!isCurrentUser()){
+            startActivity(new Intent(MainActivity.this, Login.class));
+        }
         setContentView(R.layout.activity_main);
         /*final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -354,4 +359,16 @@ public class MainActivity extends AppCompatActivity {
             mCircleView.setValueAnimated(42);
         }
     }*/
+
+    public boolean isCurrentUser(){
+
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
+        final String authToken = sharedPreferences.getString("authToken", "");
+
+        if(authToken == null || authToken.isEmpty() || authToken.length() < 0){
+            return false;
+        }
+
+        return true;
+    }
 }

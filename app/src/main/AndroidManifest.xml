@@ -11,7 +11,7 @@
         android:name=".AppController"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +23,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:label="Meal"/>
         <activity android:name=".Meal" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Login" />
         <activity android:name=".FinalScreen" />
         <activity android:name=".GeneralStay"
             android:label="General Stay"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
