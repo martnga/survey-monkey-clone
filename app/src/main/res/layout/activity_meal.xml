@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_margin="5dp">
+        >
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardBreakFast"
@@ -60,7 +60,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_gravity="center_vertical"
                     android:textStyle="bold"
@@ -152,10 +152,11 @@
                     </LinearLayout>
                     <android.support.design.widget.FloatingActionButton
                         android:id="@+id/Submit"
+                        android:backgroundTint="@color/colorPrimaryDark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:src="@drawable/ic_done" />
+                        android:src="@drawable/ic_navigate_next_white_24dp" />
                 </LinearLayout>
                 </android.support.v7.widget.CardView>
         </android.support.v4.widget.NestedScrollView>
