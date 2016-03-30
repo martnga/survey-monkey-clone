@@ -35,7 +35,7 @@ public class Meal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_break_fast);
+        setContentView(R.layout.activity_meal);
         meal1=(TextView) findViewById(R.id.meal1);
         options=(TextView) findViewById(R.id.options);
         ratingBar=(RatingBar) findViewById(R.id.ratingBar);

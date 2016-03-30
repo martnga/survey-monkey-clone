@@ -1,5 +1,6 @@
 package com.craft.Survey;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,6 +28,8 @@ public class Login extends AppCompatActivity {
 
     EditText mEmail, mPassword;
     public static String LOGIN_URL = "http://196.43.248.17:8080/afex/api/users/login";
+    final ProgressDialog progressDialog = new ProgressDialog(Login.this,
+            R.style.AppTheme_Dark_Dialog);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,8 +42,16 @@ public class Login extends AppCompatActivity {
         findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Init Progress Dialog
+                findViewById(R.id.btn_login).setEnabled(false);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Authenticating...");
+                progressDialog.show();
+
                String email =  mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
+                Log.d("Login Class", email + " " + password);
                 loginUser(email, password);
             }
         });
@@ -60,9 +71,12 @@ public class Login extends AppCompatActivity {
                             editor.putString("phoneNumber", getPhoneNumber());
                             editor.putString("authToken", (String) response.get("token"));
                             editor.commit();*/
+                            progressDialog.dismiss();
                             startActivity(new Intent(Login.this, MainActivity.class));
                            // finish();
-                        }catch (Exception e){}
+                        }catch (Exception e){
+                            progressDialog.dismiss();
+                        }
 
                     }
                 },
@@ -70,6 +84,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("Authentication error", "ERROR " + error.getMessage());
+                        progressDialog.dismiss();
 
                     }
                 }){

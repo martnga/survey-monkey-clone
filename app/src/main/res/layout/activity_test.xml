@@ -22,7 +22,7 @@
     CircleProgressView:cpv_barColor="@color/colorPrimary"
     CircleProgressView:cpv_rimColor="@color/white"
     CircleProgressView:cpv_textColor="@color/colorPrimaryDark"
-    CircleProgressView:cpv_unitColor="@color/colorAccent"
+    CircleProgressView:cpv_unitColor="@color/colorPrimaryDark"
     CircleProgressView:cpv_spinColor="@color/colorPrimary"
     CircleProgressView:cpv_barWidth="15dp"
     CircleProgressView:cpv_rimWidth="15dp"

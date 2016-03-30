@@ -143,10 +143,10 @@ public class MainActivity extends AppCompatActivity {
 //
 //        //color
 //        //you can use a gradient
-          mCircleView.setBarColor(getResources().getColor(R.color.colorPrimaryDark),
-                  getResources().getColor(R.color.colorPrimary),
-                  getResources().getColor(R.color.colorAccent),
-                  getResources().getColor(R.color.error_color));
+          mCircleView.setBarColor(getResources().getColor(R.color.colorPrimary),
+                  getResources().getColor(R.color.colorOne),
+                  getResources().getColor(R.color.colorTwo),
+                  getResources().getColor(R.color.colorThree));
 //
 //        //colors of text and unit can be set via
 //        mCircleView.setTextColor(Color.RED);
