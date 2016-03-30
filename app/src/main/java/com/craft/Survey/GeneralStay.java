@@ -3,6 +3,7 @@ package com.craft.Survey;
 
 
 
+
 import android.os.AsyncTask;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -22,6 +23,8 @@ import android.widget.Switch;
 
 import com.github.florent37.viewanimator.ViewAnimator;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +40,6 @@ public class GeneralStay extends AppCompatActivity {
     // The log tag.
     private final static String TAG = "GeneralStayClass";
     ImageView mRatingImage;
-
     CircleProgressView mCircleView;
     Switch mSwitchSpin;
     Switch mSwitchShowUnit;
@@ -75,9 +77,9 @@ public class GeneralStay extends AppCompatActivity {
             public void onProgressChanged(float value) {
                 Log.d(TAG, "Progress Changed: " + value);
                 if(value > 50){
-                    mRatingImage.setImageDrawable(GeneralStay.this.getResources().getDrawable(R.drawable.happy));
+                    mRatingImage.setImageDrawable(GeneralStay.this.getResources().getDrawable(R.drawable.thumbs_up));
                 }else {
-                    mRatingImage.setImageDrawable(GeneralStay.this.getResources().getDrawable(R.drawable.sad));
+                    mRatingImage.setImageDrawable(GeneralStay.this.getResources().getDrawable(R.drawable.thumbs_down));
                 }
 
                 ViewAnimator
@@ -339,4 +341,5 @@ public class GeneralStay extends AppCompatActivity {
         super.onStop();
 
     }
+
 }

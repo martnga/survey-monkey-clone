@@ -31,9 +31,9 @@ public class Login extends AppCompatActivity {
 
     EditText mEmail, mPassword;
     Button mLoginBtn;
-    public static String LOGIN_URL = AppController.URL + "/users/login";
     ProgressDialog progressDialog;
     public static final String PREFS_NAME = "CREDENTIALS";
+    public static String LOGIN_URL = AppController.URL + "/users/login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

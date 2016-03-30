@@ -25,10 +25,20 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.florent37.viewanimator.ViewAnimator;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import at.grabner.circleprogress.AnimationState;
 import at.grabner.circleprogress.AnimationStateChangedListener;
@@ -40,10 +50,14 @@ public class MainActivity extends AppCompatActivity {
 
     TextView mealbtn,general,Intro;
     public static final String PREFS_NAME = "CREDENTIALS";
+    public static final String TAG = "MainActivityClass";
+    public static String GENERAL_STAY_URL = AppController.URL + "/questions/1";
+    public static String MEAL_URL = AppController.URL + "/questions/2";
+    public static String KEY_AUTH_TOKEN = "X-Auth-Token";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
         if(!isCurrentUser()){
             startActivity(new Intent(MainActivity.this, Login.class));
         }
@@ -59,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
         Typeface ButtonFont=Typeface.createFromAsset(getAssets(),"fonts/SourceSerifPro-Bold.ttf");
         mealbtn.setTypeface(ButtonFont);
         general.setTypeface(ButtonFont);
+
+        FetchGeneralStayQuestions();
+        FetchMealQuestions();
+
         mealbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,5 +104,109 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+
+    //Fetching General Stay Questions
+    public void FetchGeneralStayQuestions(){
+
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
+        final String authToken = sharedPreferences.getString("authToken", "");
+
+        /*JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("authToken", authToken);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
+
+        JsonObjectRequest authRequest = new JsonObjectRequest( Request.Method.GET,GENERAL_STAY_URL,null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            Log.d(TAG, response.toString());
+
+                            //progressDialog.dismiss();
+                            // startActivity(new Intent(GeneralStay.this, MainActivity.class));
+                            // finish();
+                        }catch (Exception e){
+                            //progressDialog.dismiss();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("GenralStay Fetch error", "ERROR " + error.getCause());
+                        //progressDialog.dismiss();
+
+                    }
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put(KEY_AUTH_TOKEN, authToken);
+                return headers;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(authRequest);
+
+    }
+
+    //Fetching Meal Questions
+    public void FetchMealQuestions(){
+
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
+        final String authToken = sharedPreferences.getString("authToken", "");
+
+        /*JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("authToken", authToken);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
+
+        JsonObjectRequest authRequest = new JsonObjectRequest( Request.Method.GET,MEAL_URL,null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            Log.d(TAG, response.toString());
+
+                            //progressDialog.dismiss();
+                            // startActivity(new Intent(GeneralStay.this, MainActivity.class));
+                            // finish();
+                        }catch (Exception e){
+                            //progressDialog.dismiss();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Meal Fetching error", "ERROR " + error.getCause());
+                        //progressDialog.dismiss();
+
+                    }
+                }){
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put(KEY_AUTH_TOKEN, authToken);
+                return headers;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(authRequest);
+
     }
 }
