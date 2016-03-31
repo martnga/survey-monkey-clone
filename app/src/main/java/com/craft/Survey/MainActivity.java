@@ -5,11 +5,13 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import android.os.AsyncTask;
@@ -59,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
     public static HashMap<String, String>  GeneralStayQuestions = new HashMap<>();
     public static HashMap<String, String>  MealQuestions = new HashMap<>();
 
+    public static HashMap<String, Boolean>  GnrlStayQstnsIfRatings = new HashMap<>();
+    public static HashMap<String, Boolean>  MealQstnsIfRatings = new HashMap<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.WHITE);*/
         mealbtn=(TextView) findViewById(R.id.mealbtn);
+        final LinearLayout linearLayout = (LinearLayout)  findViewById(R.id.linearLayout);
         general=(TextView) findViewById(R.id.general);
         Intro=(TextView) findViewById(R.id.Intro);
         Typeface CustomFont=Typeface.createFromAsset(getAssets(),"fonts/SourceSerifPro-Regular.ttf");
@@ -86,15 +92,45 @@ public class MainActivity extends AppCompatActivity {
         mealbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,Meal.class);
-                startActivity(intent);
+                if(!MealQuestions.isEmpty()) {
+                    startActivity(new Intent(MainActivity.this, Meal.class));
+                }else {
+                    Snackbar snackbar = Snackbar
+                            .make(linearLayout, "Get Internet Connection", Snackbar.LENGTH_LONG)
+                    .setAction("Settings", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                        }
+                    });
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundColor(Color.WHITE);
+                    TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    textView.setTextColor(Color.parseColor("#04A64B"));
+                    snackbar.show();
+                }
             }
         });
         general.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,GeneralStay.class);
-                startActivity(intent);
+                if(!GeneralStayQuestions.isEmpty()) {
+                    startActivity(new Intent(MainActivity.this,GeneralStay.class));
+                }else {
+                    Snackbar snackbar = Snackbar
+                            .make(linearLayout, "Get Internet Connection", Snackbar.LENGTH_LONG)
+                            .setAction("Settings", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                                }
+                            });
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundColor(Color.WHITE);
+                    TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    textView.setTextColor(Color.parseColor("#04A64B"));
+                    snackbar.show();
+                }
             }
         });
     }
@@ -138,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
                                 JSONObject obj = questions.getJSONObject(i);
 
                                 GeneralStayQuestions.put(obj.getString("id"), obj.getString("textContent"));
+                                GnrlStayQstnsIfRatings.put(obj.getString("id"), Boolean.valueOf(obj.getString("isAboutRating")));
                             }
 
                             //progressDialog.dismiss();
@@ -194,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
                             for( int i = 0; i < questions.length(); i++){
                                 JSONObject obj = questions.getJSONObject(i);
                                 MealQuestions.put(obj.getString("id"), obj.getString("textContent"));
+                                MealQstnsIfRatings.put(obj.getString("id"), Boolean.valueOf(obj.getString("isAboutRating")));
                             }
                             //progressDialog.dismiss();
                             // startActivity(new Intent(GeneralStay.this, MainActivity.class));

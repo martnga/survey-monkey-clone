@@ -104,7 +104,7 @@ public class GeneralStay extends AppCompatActivity {
                     mRatingImage.setImageDrawable(GeneralStay.this.getResources().getDrawable(R.drawable.thumbs_up));
                 }else if (value < 50){
                     mRatingImage.setImageDrawable(GeneralStay.this.getResources().getDrawable(R.drawable.thumbs_down));
-                }else {
+                }else if (value == 50) {
                     mRatingImage.setImageDrawable(GeneralStay.this.getResources().getDrawable(R.drawable.level));
                 }
 
@@ -132,7 +132,7 @@ public class GeneralStay extends AppCompatActivity {
                     Snackbar snackbar = Snackbar
                             .make(main_content, "Please Provide Your FeedBack.", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
-                    snackbarView.setBackgroundColor(Color.parseColor("#005FAA"));
+                    snackbarView.setBackgroundColor(Color.parseColor("#025b29"));
                     TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();

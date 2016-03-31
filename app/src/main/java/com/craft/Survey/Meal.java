@@ -95,11 +95,12 @@ public class Meal extends AppCompatActivity {
             @Override
             public void onProgressChanged(float value) {
                 Log.d(TAG, "Progress Changed: " + value);
-                if(value > 50){
+                int val = (int) value;
+                if(val > 50){
                     mRatingImage.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.thumbs_up));
-                }else if (value < 50){
+                }else if (val < 50){
                     mRatingImage.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.thumbs_down));
-                }else {
+                }else if (val == 50){
                     mRatingImage.setImageDrawable(Meal.this.getResources().getDrawable(R.drawable.level));
                 }
 
@@ -127,7 +128,7 @@ public class Meal extends AppCompatActivity {
                     Snackbar snackbar = Snackbar
                             .make(main_content, "Please Provide Your FeedBack.", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
-                    snackbarView.setBackgroundColor(Color.parseColor("#005FAA"));
+                    snackbarView.setBackgroundColor(Color.parseColor("#025b29"));
                     TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
