@@ -133,20 +133,21 @@ public class Meal extends AppCompatActivity {
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } else {
-                    MealAnswers.put(keys.get(i), ratingsValue + "");
-                    i++;
-                    mQuestionTxt.setText(MainActivity.MealQuestions.get(keys.get(i)));
-                    mCircleView.setValue(50);
 
-
+                    if (i < (keys.size() - 1)) {
+                        MealAnswers.put(keys.get(i), ratingsValue + "");
+                        i++;
+                        mQuestionTxt.setText(MainActivity.MealQuestions.get(keys.get(i)));
+                        mCircleView.setValue(50);
+                    } else {
+                        MealAnswers.put(keys.get(i), ratingsValue + "");
+                        startActivity(new Intent(Meal.this, FinalScreen.class));
+                        Log.d(TAG, MealAnswers.toString());
+                        finish();
+                    }
 
                 }
-                if (i >= MainActivity.MealQuestions.size() - 1) {
-                    startActivity(new Intent(Meal.this, FinalScreen.class));
-                    Log.d(TAG, MealAnswers.toString());
-                    finish();
-                }
-                }
+            }
         });
 
         //value setting

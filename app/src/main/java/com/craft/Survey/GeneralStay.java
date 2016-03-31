@@ -137,17 +137,19 @@ public class GeneralStay extends AppCompatActivity {
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } else {
-                    GeneralStayAnswers.put(keys.get(i), ratingsValue + "");
-                    i++;
-                    mQuestionTxt.setText(MainActivity.GeneralStayQuestions.get(keys.get(i)));
-                    mCircleView.setValue(50);
 
+                    if (i < (keys.size() - 1)) {
+                        GeneralStayAnswers.put(keys.get(i), ratingsValue + "");
+                        i++;
+                        mQuestionTxt.setText(MainActivity.GeneralStayQuestions.get(keys.get(i)));
+                        mCircleView.setValue(50);
+                    }else {
+                        GeneralStayAnswers.put(keys.get(i), ratingsValue + "");
+                        startActivity(new Intent(GeneralStay.this, FinalScreen.class));
+                        Log.d(TAG, GeneralStayAnswers.toString());
+                        finish();
+                    }
 
-                }
-                if (i >= MainActivity.GeneralStayQuestions.size() - 1) {
-                    startActivity(new Intent(GeneralStay.this, FinalScreen.class));
-                    Log.d(TAG, GeneralStayAnswers.toString());
-                    finish();
                 }
 
             }
