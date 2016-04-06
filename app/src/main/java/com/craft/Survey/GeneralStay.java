@@ -55,7 +55,7 @@ public class GeneralStay extends AppCompatActivity {
     Boolean mShowUnit = true;
     Spinner mSpinner;
     public HashMap<String, String> GeneralStayAnswers = new HashMap<>();
-    TextView mQuestionTxt;
+    TextView mQuestionTxt,mValueTxt;
     int i = 0;
 
    /* Snackbar snackbar = Snackbar
@@ -69,7 +69,7 @@ public class GeneralStay extends AppCompatActivity {
     FloatingActionButton mNextFab;
     CoordinatorLayout main_content;
     ArrayList<String> keys =  new ArrayList<>();
-    float ratingsValue = 50;
+    double ratingsValue = 50.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,24 +82,26 @@ public class GeneralStay extends AppCompatActivity {
 
         main_content = (CoordinatorLayout) findViewById(R.id.main_content);
         mNextFab = (FloatingActionButton) findViewById(R.id.next_fab);
+        mValueTxt = (TextView) findViewById(R.id.value_txt);
         mQuestionTxt = (TextView) findViewById(R.id.question_txt);
         mCircleView = (CircleProgressView) findViewById(R.id.circleView);
         mRatingImage = (ImageView) findViewById(R.id.rating_image);
 
         //Getting The Question IDs
-        for (Map.Entry<String, String> entry : QuestionnaireIntroActivity.GeneralStayQuestions.entrySet())
+        for (Map.Entry<String, String> entry : MainActivity.GeneralStayQuestions.entrySet())
         {
 
             keys.add(entry.getKey());
 
         }
 
-        mQuestionTxt.setText(QuestionnaireIntroActivity.GeneralStayQuestions.get(keys.get(i)));
+        mQuestionTxt.setText(MainActivity.GeneralStayQuestions.get(keys.get(i)));
 
         mCircleView.setOnProgressChangedListener(new CircleProgressView.OnProgressChangedListener() {
             @Override
             public void onProgressChanged(float value) {
                 Log.d(TAG, "Progress Changed: " + value);
+                mValueTxt.setText((int) value + "%");
                 if(value > 50){
                     mRatingImage.setImageDrawable(GeneralStay.this.getResources().getDrawable(R.drawable.thumbs_up));
                 }else if (value < 50){
@@ -141,8 +143,8 @@ public class GeneralStay extends AppCompatActivity {
                     if (i < (keys.size() - 1)) {
                         GeneralStayAnswers.put(keys.get(i), ratingsValue + "");
                         i++;
-                        mQuestionTxt.setText(QuestionnaireIntroActivity.GeneralStayQuestions.get(keys.get(i)));
-                        mCircleView.setValue(50);
+                        mQuestionTxt.setText(MainActivity.GeneralStayQuestions.get(keys.get(i)));
+                        mSeekBar.setProgress(50);
                     }else {
                         GeneralStayAnswers.put(keys.get(i), ratingsValue + "");
                         startActivity(new Intent(GeneralStay.this, FinalScreen.class));

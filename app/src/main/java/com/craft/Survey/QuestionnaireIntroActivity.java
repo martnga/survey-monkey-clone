@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -29,7 +30,7 @@ import java.util.Map;
  */
 public class QuestionnaireIntroActivity extends Activity {
     TextView mStartBtn;
-    LinearLayout mLayout;
+    RelativeLayout mLayout;
 
     public static String TAG = "QuestionnaireIntroActivity";
 
@@ -41,7 +42,7 @@ public class QuestionnaireIntroActivity extends Activity {
         setContentView(R.layout.activity_questionnaire_intro);
 
         mStartBtn = (TextView) findViewById(R.id.start_questionnaire_btn);
-        mLayout = (LinearLayout) findViewById(R.id.questionnaire_intro_layout);
+        mLayout = (RelativeLayout) findViewById(R.id.questionnaire_intro_layout);
         final String mQuestionnaireType = getIntent().getExtras().getString("interview");
 
         if (mQuestionnaireType.equals("meal")){
@@ -59,7 +60,7 @@ public class QuestionnaireIntroActivity extends Activity {
                 if(mQuestionnaireType.equals("meal") && ! MainActivity.MealQuestions.isEmpty()) {
                     startActivity(new Intent(QuestionnaireIntroActivity.this, Meal.class));
                 }else if(mQuestionnaireType.equals("generalStay") && !MainActivity.GeneralStayQuestions.isEmpty()) {
-                    startActivity(new Intent(QuestionnaireIntroActivity.this, Meal.class));
+                    startActivity(new Intent(QuestionnaireIntroActivity.this, GeneralStay.class));
                 }
             }
         });
