@@ -1,68 +1,48 @@
 package com.craft.Survey;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.design.widget.CollapsingToolbarLayout;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-import android.widget.SeekBar;
-import android.widget.Spinner;
-import android.widget.Switch;
-import android.widget.Toast;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.github.florent37.viewanimator.ViewAnimator;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import at.grabner.circleprogress.AnimationState;
-import at.grabner.circleprogress.AnimationStateChangedListener;
-import at.grabner.circleprogress.CircleProgressView;
-import at.grabner.circleprogress.TextMode;
-import at.grabner.circleprogress.UnitPosition;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView mealbtn,general,Intro;
     public static final String PREFS_NAME = "CREDENTIALS";
     public static final String TAG = "MainActivityClass";
-    public static String GENERAL_STAY_URL = AppController.URL + "/questions/survey/2";
-    public static String MEAL_URL = AppController.URL + "/questions/survey/1";
-    public static String KEY_AUTH_TOKEN = "X-Auth-Token";
 
-    public static HashMap<String, String>  GeneralStayQuestions = new HashMap<>();
+    public static HashMap<String, String> GeneralStayQuestions = new HashMap<>();
     public static HashMap<String, String>  MealQuestions = new HashMap<>();
 
     public static HashMap<String, Boolean>  GnrlStayQstnsIfRatings = new HashMap<>();
     public static HashMap<String, Boolean>  MealQstnsIfRatings = new HashMap<>();
+
+    public static String GENERAL_STAY_URL = AppController.URL + "/questions/survey/2";
+    public static String MEAL_URL = AppController.URL + "/questions/survey/1";
+    public static String KEY_AUTH_TOKEN = "X-Auth-Token";
 
 
     @Override
@@ -92,8 +72,12 @@ public class MainActivity extends AppCompatActivity {
         mealbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!MealQuestions.isEmpty()) {
-                    startActivity(new Intent(MainActivity.this, Meal.class));
+                if(isDataOn()) {
+                    Intent mIntent = new Intent(MainActivity.this, QuestionnaireIntroActivity.class);
+                    Bundle mBundle = new Bundle();
+                    mBundle.putString("interview", "meal");
+                    mIntent.putExtras(mBundle);
+                    startActivity(mIntent);
                 }else {
                     Snackbar snackbar = Snackbar
                             .make(linearLayout, "Get Internet Connection", Snackbar.LENGTH_LONG)
@@ -114,8 +98,12 @@ public class MainActivity extends AppCompatActivity {
         general.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!GeneralStayQuestions.isEmpty()) {
-                    startActivity(new Intent(MainActivity.this,GeneralStay.class));
+                if(isDataOn()) {
+                    Intent mIntent = new Intent(MainActivity.this, QuestionnaireIntroActivity.class);
+                    Bundle mBundle = new Bundle();
+                    mBundle.putString("interview", "generalStay");
+                    mIntent.putExtras(mBundle);
+                    startActivity(mIntent);
                 }else {
                     Snackbar snackbar = Snackbar
                             .make(linearLayout, "Get Internet Connection", Snackbar.LENGTH_LONG)
@@ -135,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        FetchGeneralStayQuestions();
+        FetchMealQuestions();
+    }
 
     public boolean isCurrentUser(){
 
@@ -146,6 +140,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+
+    public boolean isDataOn(){
+        ConnectivityManager cm = (ConnectivityManager)
+                this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        // if no network is available networkInfo will be null
+        // otherwise check if phone is connected
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 
 

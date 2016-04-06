@@ -24,6 +24,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:label="Meal"/>
         <activity android:name=".Meal" />
+        <activity android:name=".QuestionnaireIntroActivity" />
         <activity android:name=".Login" />
         <activity android:name=".FinalScreen" />
         <activity android:name=".GeneralStay"

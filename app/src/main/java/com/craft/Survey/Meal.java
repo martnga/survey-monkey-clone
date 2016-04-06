@@ -82,14 +82,14 @@ public class Meal extends AppCompatActivity {
         mRatingImage = (ImageView) findViewById(R.id.rating_image);
 
         //Getting The Question IDs
-        for (Map.Entry<String, String> entry : MainActivity.MealQuestions.entrySet())
+        for (Map.Entry<String, String> entry : QuestionnaireIntroActivity.MealQuestions.entrySet())
         {
 
             keys.add(entry.getKey());
 
         }
 
-        mQuestionTxt.setText(MainActivity.MealQuestions.get(keys.get(i)));
+        mQuestionTxt.setText(QuestionnaireIntroActivity.MealQuestions.get(keys.get(i)));
 
         mCircleView.setOnProgressChangedListener(new CircleProgressView.OnProgressChangedListener() {
             @Override
@@ -137,7 +137,7 @@ public class Meal extends AppCompatActivity {
                     if (i < (keys.size() - 1)) {
                         MealAnswers.put(keys.get(i), ratingsValue + "");
                         i++;
-                        mQuestionTxt.setText(MainActivity.MealQuestions.get(keys.get(i)));
+                        mQuestionTxt.setText(QuestionnaireIntroActivity.MealQuestions.get(keys.get(i)));
                         mCircleView.setValue(50);
                     } else {
                         MealAnswers.put(keys.get(i), ratingsValue + "");

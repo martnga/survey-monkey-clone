@@ -87,14 +87,14 @@ public class GeneralStay extends AppCompatActivity {
         mRatingImage = (ImageView) findViewById(R.id.rating_image);
 
         //Getting The Question IDs
-        for (Map.Entry<String, String> entry : MainActivity.GeneralStayQuestions.entrySet())
+        for (Map.Entry<String, String> entry : QuestionnaireIntroActivity.GeneralStayQuestions.entrySet())
         {
 
             keys.add(entry.getKey());
 
         }
 
-        mQuestionTxt.setText(MainActivity.GeneralStayQuestions.get(keys.get(i)));
+        mQuestionTxt.setText(QuestionnaireIntroActivity.GeneralStayQuestions.get(keys.get(i)));
 
         mCircleView.setOnProgressChangedListener(new CircleProgressView.OnProgressChangedListener() {
             @Override
@@ -141,7 +141,7 @@ public class GeneralStay extends AppCompatActivity {
                     if (i < (keys.size() - 1)) {
                         GeneralStayAnswers.put(keys.get(i), ratingsValue + "");
                         i++;
-                        mQuestionTxt.setText(MainActivity.GeneralStayQuestions.get(keys.get(i)));
+                        mQuestionTxt.setText(QuestionnaireIntroActivity.GeneralStayQuestions.get(keys.get(i)));
                         mCircleView.setValue(50);
                     }else {
                         GeneralStayAnswers.put(keys.get(i), ratingsValue + "");
@@ -269,13 +269,11 @@ public class GeneralStay extends AppCompatActivity {
 
         //Setup SeekBar
         mSeekBar = (SeekBar) findViewById(R.id.seekBar);
-
         mSeekBar.setMax(100);
         mSeekBar.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
                     }
 
                     @Override
