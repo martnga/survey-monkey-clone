@@ -12,18 +12,6 @@
                   android:paddingTop="@dimen/pad_200dp"
                   >
 
-
-    <TextView
-        android:text=""
-        android:textAlignment="center"
-        android:fontFamily="sans-serif"
-        android:id="@+id/question_txt"
-        android:textSize="@dimen/txt_16sp"
-        android:textColor="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/pad_15dp"/>
-
         <at.grabner.circleprogress.CircleProgressView
             android:visibility="gone"
             android:id="@+id/circleView"
@@ -50,7 +38,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="wrap_content">
         <RelativeLayout
             android:focusable="true"
             android:paddingLeft="16dp"
@@ -64,11 +52,24 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:text="Lorem Ipsum"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif"
+                android:id="@+id/question_txt"
+                android:textSize="@dimen/txt_16sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/pad_15dp"/>
+
+            <TextView
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"/>
+
+
     <SeekBar
         android:layout_centerInParent="true"
         android:id="@+id/seekBar"
@@ -81,6 +82,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_width="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_height="wrap_content" />
             <ImageView
                 android:layout_alignParentRight="true"

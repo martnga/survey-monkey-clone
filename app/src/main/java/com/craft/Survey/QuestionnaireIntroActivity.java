@@ -1,6 +1,7 @@
 package com.craft.Survey;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -32,6 +33,7 @@ public class QuestionnaireIntroActivity extends Activity {
     TextView mStartBtn, mWelcomeTxt;
     RelativeLayout mLayout;
 
+    ProgressDialog progressDialog;
     public static String TAG = "QuestionnaireIntroActivity";
 
     public static final String PREFS_NAME = "CREDENTIALS";
@@ -41,6 +43,7 @@ public class QuestionnaireIntroActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire_intro);
 
+        progressDialog = new ProgressDialog(QuestionnaireIntroActivity.this,R.style.AppTheme_Dark_Dialog);
         mStartBtn = (TextView) findViewById(R.id.start_questionnaire_btn);
         mWelcomeTxt = (TextView) findViewById(R.id.welcome_txt);
         mLayout = (RelativeLayout) findViewById(R.id.questionnaire_intro_layout);
@@ -60,9 +63,17 @@ public class QuestionnaireIntroActivity extends Activity {
 
             @Override
             public void onClick(View v) {
+                //Init Progress Dialog
+                //mLoginBtn.setEnabled(false);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Loading...");
+                progressDialog.show();
+
                 if(mQuestionnaireType.equals("meal") && ! MainActivity.MealQuestions.isEmpty()) {
+                    progressDialog.dismiss();
                     startActivity(new Intent(QuestionnaireIntroActivity.this, Meal.class));
                 }else if(mQuestionnaireType.equals("generalStay") && !MainActivity.GeneralStayQuestions.isEmpty()) {
+                    progressDialog.dismiss();
                     startActivity(new Intent(QuestionnaireIntroActivity.this, GeneralStay.class));
                 }
             }

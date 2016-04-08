@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text=""
-        android:textSize="@dimen/txt_47sp"
+        android:textSize="@dimen/txt_23sp"
         android:layout_marginTop="@dimen/pad_50dp"/>
 
 
