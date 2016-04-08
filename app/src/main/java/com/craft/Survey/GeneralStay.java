@@ -145,6 +145,7 @@ public class GeneralStay extends AppCompatActivity {
                         i++;
                         mQuestionTxt.setText(MainActivity.GeneralStayQuestions.get(keys.get(i)));
                         mSeekBar.setProgress(50);
+                        mValueTxt.setText(50 + "%");
                     }else {
                         GeneralStayAnswers.put(keys.get(i), ratingsValue + "");
                         startActivity(new Intent(GeneralStay.this, FinalScreen.class));

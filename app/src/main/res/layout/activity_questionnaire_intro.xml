@@ -6,6 +6,17 @@
               android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/welcome_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textSize="@dimen/txt_47sp"
+        android:layout_marginTop="@dimen/pad_50dp"/>
+
+
+ <TextView
         android:id="@+id/start_questionnaire_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

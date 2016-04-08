@@ -29,7 +29,7 @@ import java.util.Map;
  * Created by mansa on 4/6/16.
  */
 public class QuestionnaireIntroActivity extends Activity {
-    TextView mStartBtn;
+    TextView mStartBtn, mWelcomeTxt;
     RelativeLayout mLayout;
 
     public static String TAG = "QuestionnaireIntroActivity";
@@ -42,13 +42,16 @@ public class QuestionnaireIntroActivity extends Activity {
         setContentView(R.layout.activity_questionnaire_intro);
 
         mStartBtn = (TextView) findViewById(R.id.start_questionnaire_btn);
+        mWelcomeTxt = (TextView) findViewById(R.id.welcome_txt);
         mLayout = (RelativeLayout) findViewById(R.id.questionnaire_intro_layout);
         final String mQuestionnaireType = getIntent().getExtras().getString("interview");
 
         if (mQuestionnaireType.equals("meal")){
+            mWelcomeTxt.setText("How did you like the meals?");
             mLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.meal));
 
         }else if(mQuestionnaireType.equals("generalStay")){
+            mWelcomeTxt.setText("How did you like your stay?");
             mLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.general_stay));
         }
 
